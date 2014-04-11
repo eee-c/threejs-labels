@@ -54,9 +54,9 @@ Label.prototype.buildElement = function() {
 
 Label.prototype.render = function(scene, cam) {
   var p3d = this.object.position.clone();
-  p3d.z = p3d.z + this.object.boundRadius * Math.sin(cam.rotation.x);
-  p3d.y = p3d.y + this.object.boundRadius * Math.cos(cam.rotation.x) * Math.cos(cam.rotation.z);
-  p3d.x = p3d.x - this.object.boundRadius * Math.sin(cam.rotation.z) * Math.sin(cam.rotation.y);
+  p3d.z = p3d.z + this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.x);
+  p3d.y = p3d.y + this.object.geometry.boundingSphere.radius * Math.cos(cam.rotation.x) * Math.cos(cam.rotation.z);
+  p3d.x = p3d.x - this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.z) * Math.sin(cam.rotation.y);
 
   var projector = new THREE.Projector(),
       pos = projector.projectVector(p3d, cam),
