@@ -30,6 +30,7 @@ THREE.CanvasRenderer = function(parameters) {
 };
 
 function Label(object, content, duration) {
+//     probably need to add options object here
   this.object = object;
   this.content = content;
   if (duration) this.remove(duration);
@@ -53,10 +54,15 @@ Label.prototype.buildElement = function() {
 };
 
 Label.prototype.render = function(scene, cam) {
-  var p3d = this.object.position.clone();
-  p3d.z = p3d.z + this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.x);
-  p3d.y = p3d.y + this.object.geometry.boundingSphere.radius * Math.cos(cam.rotation.x) * Math.cos(cam.rotation.z);
-  p3d.x = p3d.x - this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.z) * Math.sin(cam.rotation.y);
+  if (this.object instanceof THREE.Vector3){
+    p3d=this.object
+  }
+  else{
+    var p3d = this.object.position.clone();
+    p3d.z = p3d.z + this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.x);
+    p3d.y = p3d.y + this.object.geometry.boundingSphere.radius * Math.cos(cam.rotation.x) * Math.cos(cam.rotation.z);
+    p3d.x = p3d.x - this.object.geometry.boundingSphere.radius * Math.sin(cam.rotation.z) * Math.sin(cam.rotation.y);
+  }
 
   var projector = new THREE.Projector(),
       pos = projector.projectVector(p3d, cam),
