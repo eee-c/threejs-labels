@@ -55,7 +55,7 @@ Label.prototype.buildElement = function() {
 
 Label.prototype.render = function(scene, cam) {
   if (this.object instanceof THREE.Vector3){
-    p3d=this.object
+    p3d=this.object.clone()
   }
   else{
     var p3d = this.object.position.clone();
