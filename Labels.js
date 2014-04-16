@@ -32,7 +32,6 @@ THREE.CanvasRenderer = function(parameters) {
 function Label(object, content, duration) {
 //     probably need to add options object here
   this.object = object;
-  this.content = content;
   if (duration) this.remove(duration);
 
   this.el = this.buildElement();
@@ -41,14 +40,17 @@ function Label(object, content, duration) {
 
 Label.prototype.buildElement = function() {
   var el = document.createElement('div');
-  el.textContent = this.content;
-  el.style.backgroundColor = 'white';
-  el.style.position = 'absolute';
-  el.style.padding = '1px 4px';
-  el.style.borderRadius = '2px';
-  el.style.maxWidth = (window.innerWidth * 0.25) + 'px';
-  el.style.maxHeight = (window.innerHeight * 0.25) + 'px';
-  el.style.overflowY = 'auto';
+  el.classList.add("label3D");
+  if(typeof this.content == "string"){
+    el.textContent = this.content;
+    }  else {
+    var inp = document.createElement('input')
+    inp.setAttribute("type","text")
+    inp.setAttribute("value","enter your message")
+    el.appendChild(inp);
+    inp.focus();        
+    }
+  
   document.body.appendChild(el);
   return el;
 };
