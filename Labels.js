@@ -103,6 +103,6 @@ Label.prototype.setContent = function(content) {
 Label.prototype.remove = function(delay) {
   var that = this;
   if (delay) return setTimeout(function(){that.remove();}, delay * 1000);
+  this.showText = false;
   $(this.el).fadeOut();
-  return LabelPlugin.remove(this);
 };
