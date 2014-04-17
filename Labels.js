@@ -53,16 +53,7 @@ Label.prototype.buildMarker = function() {
 Label.prototype.buildElement = function() {
   var el = document.createElement('div');
   el.classList.add("label3D");
-  if(typeof this.content == "string"){
-        el.textContent = this.content;
-        }  else {
-        var inp = document.createElement('input')
-        inp.setAttribute("type","text")
-        inp.setAttribute("value","enter your message")
-        el.appendChild(inp);
-        inp.focus();        
-  }
-  
+  el.textContent = this.content;
   document.body.appendChild(el);
   return el;
 };
@@ -112,6 +103,6 @@ Label.prototype.setContent = function(content) {
 Label.prototype.remove = function(delay) {
   var that = this;
   if (delay) return setTimeout(function(){that.remove();}, delay * 1000);
-  this.el.style.display = 'none';
+  $(this.el).fadeOut();
   return LabelPlugin.remove(this);
 };
